@@ -6,6 +6,7 @@ This repo contains an example of running a PySpark 4.0.0 job on a kubernetes clu
 - [Minikube](https://minikube.sigs.k8s.io/docs/start/) installed
 - [Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) installed
 - [Docker](https://docs.docker.com/get-docker/) installed
+- [yq](https://github.com/mikefarah/yq) installed (optional - used to parse kubectl output for cluster IP)
 
 ## Steps to Run
 
