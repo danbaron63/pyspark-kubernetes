@@ -7,6 +7,7 @@ This repo contains an example of running a PySpark 4.0.0 job on a kubernetes clu
 - [Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) installed
 - [Docker](https://docs.docker.com/get-docker/) installed
 - [yq](https://github.com/mikefarah/yq) installed (optional - used to parse kubectl output for cluster IP)
+- Java 17 installed - The Makefile will attempt to set `JAVA_HOME` to your local 17 - if this fails then comment this out and set it manually.
 
 ## Steps to Run
 
