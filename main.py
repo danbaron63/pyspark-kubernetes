@@ -11,9 +11,5 @@ def main():
     df.show()
 
 
-def transform(df: DataFrame) -> DataFrame:
-    return df.withColumn("sum", df["c1"] + df["c2"] + df["c3"])
-
-
 if __name__ == "__main__":
     main()

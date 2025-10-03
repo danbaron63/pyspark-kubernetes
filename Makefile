@@ -34,5 +34,5 @@ delete:
 
 .PHONY: run-cluster
 run-cluster: docker-build kube-apply
-	kubectl delete -f job/job.yaml
+	kubectl delete -f job/job.yaml || echo "No existing job to delete, skipping"
 	kubectl apply -f job/job.yaml
