@@ -1,0 +1,27 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: pyspark-kubernetes1
+  namespace: spark
+spec:
+  template:
+    spec:
+      serviceAccount: spark
+      containers:
+      - name: pyspark-kubernetes
+        image: pyspark-kubernetes:latest
+        imagePullPolicy: Never
+        command:
+          - /bin/sh
+          - -c
+          - >
+            /opt/spark/bin/spark-submit
+            --master k8s://https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_SERVICE_PORT_HTTPS
+            --conf spark.executor.instances=5
+            --conf spark.kubernetes.authenticate.driver.serviceAccountName=spark
+            --conf spark.kubernetes.container.image=pyspark-kubernetes:latest
+            --conf spark.kubernetes.namespace=spark
+            --deploy-mode cluster
+            local:///app/main.py
+      restartPolicy: Never
+  backoffLimit: 1

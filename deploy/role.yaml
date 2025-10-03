@@ -4,24 +4,28 @@ metadata:
   name: spark
   namespace: spark
 rules:
-- apiGroups:
-  - ""
-  resources:
+- resources:
   - pods
   - services
   - persistentvolumeclaims
+  apiGroups:
+  - ""
   verbs:
   - get
   - list
   - watch
   - create
+  - patch
+  - delete
   - deletecollection
-- apiGroups:
-  - ""
-  resources:
+- resources:
   - configmaps
+  apiGroups:
+  - ""
   verbs:
   - create
   - get
   - list
+  - patch
+  - delete
   - deletecollection

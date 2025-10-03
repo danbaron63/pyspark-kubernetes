@@ -20,20 +20,19 @@ clean:
 kube-apply:
 	kubectl apply -k deploy/
 
+.PHONY: kube-clean
+kube-clean:
+	kubectl delete -k deploy/
+
 .PHONY: start
 start:
 	minikube start
 
+.PHONY: delete
+delete:
+	minikube delete
+
 .PHONY: run-cluster
 run-cluster: docker-build kube-apply
-	JAVA_HOME=$$(/usr/libexec/java_home -v 17) \
-	eval $$(minikube -p minikube docker-env) && \
-	spark-submit \
-		--master k8s://$$(kubectl config view | yq ".clusters | .[-1] | .cluster | .server") \
-		--conf spark.executor.instances=5 \
-		--conf spark.kubernetes.authenticate.driver.serviceAccountName=spark \
-		--conf spark.kubernetes.container.image=pyspark-kubernetes:latest \
-		--conf spark.kubernetes.namespace=spark \
-		--deploy-mode cluster \
-		local:///app/main.py
-
+	kubectl delete -f job/job.yaml
+	kubectl apply -f job/job.yaml
